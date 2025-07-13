@@ -1322,9 +1322,11 @@ if(NOT SKIP_INSTALL_HEADERS AND NOT SKIP_INSTALL_ALL)
 endif()
 if(NOT SKIP_INSTALL_FILES AND NOT SKIP_INSTALL_ALL)
     install(FILES ${ZLIB_PC} DESTINATION "${PKGCONFIG_INSTALL_DIR}")
+    if(FALSE) # Slicer change: don't mess with library naming
     install(EXPORT ${EXPORT_NAME}
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${EXPORT_NAME}"
         NAMESPACE ${EXPORT_NAME}::)
+    endif() # Slicer change
     # Use GNU-style variable names
     set(INCLUDE_INSTALL_DIR ${CMAKE_INSTALL_INCLUDEDIR})
     set(LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
@@ -1419,6 +1421,7 @@ add_feature_info(INSTALL_UTILS INSTALL_UTILS "Copy minigzip and minideflate duri
 
 FEATURE_SUMMARY(WHAT ALL INCLUDE_QUIET_PACKAGES)
 
+if(FALSE) # Slicer change: don't define packaging
 #============================================================================
 # CPack
 #============================================================================
@@ -1435,3 +1438,4 @@ if("${PROJECT_BINARY_DIR}" STREQUAL "${PROJECT_SOURCE_DIR}")
 endif()
 
 include(CPack)
+endif() # Slicer change
